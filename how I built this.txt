@@ -1,4 +1,0 @@
-Step 1- Got express
-Step 2- set up .env     ---> Not working
-Step 3- set up scripts for development
-Step 4- Connecting to database(mongoose)
