@@ -1,124 +1,57 @@
 //Todo--Scroll Icon
 
-import React from 'react';
+import React, { Fragment, useEffect } from "react";
 import "./Home.css";
 import ProductCard from "./ProductCard.js";
+import MetaData from "../layout/MetaData";
+import { clearErrors, getProduct } from "../../action/productAction";
+import { useSelector, useDispatch } from "react-redux";
+import Loader from "../layout/Loader/Loader";
+import { useAlert } from "react-alert";
 
-const products = [{
-    name: "Blue T-shirt",
-    images: [
-        {
-            url: "https://i.ibb.co/DRST11n/1.webp"
-        }
-    ],
-    price: "300",
-    _id: "Amrit",
-    ratings: 2,
-    numOfReviews: 256
-}, {
-    name: "Blue T-shirt",
-    images: [
-        {
-            url: "https://i.ibb.co/DRST11n/1.webp"
-        }
-    ],
-    price: "300",
-    _id: "Amrit",
-    ratings: 2,
-    numOfReviews: 256
-}, {
-    name: "Blue T-shirt",
-    images: [
-        {
-            url: "https://i.ibb.co/DRST11n/1.webp"
-        }
-    ],
-    price: "300",
-    _id: "Amrit",
-    ratings: 2,
-    numOfReviews: 256
-}, {
-    name: "Blue T-shirt",
-    images: [
-        {
-            url: "https://i.ibb.co/DRST11n/1.webp"
-        }
-    ],
-    price: "300",
-    _id: "Amrit",
-    ratings: 2,
-    numOfReviews: 256
-}, {
-    name: "Blue T-shirt",
-    images: [
-        {
-            url: "https://i.ibb.co/DRST11n/1.webp"
-        }
-    ],
-    price: "300",
-    _id: "Amrit",
-    ratings: 2,
-    numOfReviews: 256
-}, {
-    name: "Blue T-shirt",
-    images: [
-        {
-            url: "https://i.ibb.co/DRST11n/1.webp"
-        }
-    ],
-    price: "300",
-    _id: "Amrit",
-    ratings: 2,
-    numOfReviews: 256
-}, {
-    name: "Blue T-shirt",
-    images: [
-        {
-            url: "https://i.ibb.co/DRST11n/1.webp"
-        }
-    ],
-    price: "300",
-    _id: "Amrit",
-    ratings: 2,
-    numOfReviews: 256
-}, {
-    name: "Blue T-shirt",
-    images: [
-        {
-            url: "https://i.ibb.co/DRST11n/1.webp"
-        }
-    ],
-    price: "300",
-    _id: "Amrit",
-    ratings: 2,
-    numOfReviews: 256
-}];
+const Home = () => {
+    const alert = useAlert();
+    const dispatch = useDispatch();
+    const { loading, error, products } = useSelector((state) => state.products);
 
-
-function Home() {
-    console.log(products);
+    useEffect(() => {
+        if (error) {
+            alert.error(error);
+            dispatch(clearErrors());
+        }
+        dispatch(getProduct());
+    }, [dispatch, error, alert]);
     return (
         <>
-            <div className="banner">
-                <p>Welcome to Ecommerce</p>
-                <h1>FIND AMAZING PRODUCTS BELOW</h1>
+            {loading ? (
+                <Loader />
+            ) : (
+                <>
+                    <MetaData title="STORISH" />
 
-                <a href="#container">
-                    <button>
-                        Scroll
-                    </button>
-                </a>
-            </div>
-            <h2 className="homeHeading">Featured Products</h2>
+                    <div className="banner">
+                        <p>Welcome to STORISH</p>
+                        <h1>FIND AMAZING PRODUCTS BELOW</h1>
 
-            <div className="container" id="container">
-                {products &&
-                    products.map((product) => (
-                        <ProductCard key={product._id} product={product} />
-                    ))}
-            </div>
+                        <a href="#container">
+                            <button>
+                                Scroll
+                            </button>
+                        </a>
+                    </div>
+
+                    <h2 className="homeHeading">Featured Products</h2>
+
+                    <div className="container" id="container">
+                        {products &&
+                            products.map((product) => (
+                                <ProductCard key={product._id} product={product} />
+                            ))}
+                    </div>
+                </>
+            )}
         </>
-    )
+    );
 }
 
 export default Home
