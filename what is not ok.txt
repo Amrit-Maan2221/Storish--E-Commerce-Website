@@ -1,0 +1,5 @@
+Register User is not working............
+Profile.js avatar url not working
+Protected Route
+Update Profile Avatar
+Registering User
