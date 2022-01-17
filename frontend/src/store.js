@@ -23,6 +23,8 @@ const reducer = combineReducers({
     productDetails: productDetailsReducer,
     user: userReducer,
     profile: profileReducer,
+    forgotPassword: forgotPasswordReducer,
+
 });
 let initialState = {};
 

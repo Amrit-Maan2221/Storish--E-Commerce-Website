@@ -3,3 +3,5 @@ Profile.js avatar url not working
 Protected Route
 Update Profile Avatar
 Registering User
+forgot password
+header
