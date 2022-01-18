@@ -5,4 +5,4 @@ Update Profile Avatar
 Registering User
 forgot password
 header
-product details input type not working
+product input type not working
