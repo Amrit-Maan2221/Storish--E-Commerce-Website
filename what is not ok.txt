@@ -6,3 +6,4 @@ Registering User
 forgot password
 header
 product input type not working
+login/shipping path not working
