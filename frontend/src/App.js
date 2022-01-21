@@ -20,6 +20,7 @@ import ForgotPassword from "./components/User/ForgotPassword.js";
 import ResetPassword from "./components/User/ResetPassword.js";
 import Cart from "./components/Cart/Cart.js";
 import Shipping from "./components/Cart/Shipping.js";
+import ConfirmOrder from "./components/Cart/ConfirmOrder.js";
 
 
 
@@ -55,6 +56,7 @@ function App() {
         <Route exact path="/password/reset/:token" element={<ResetPassword />} />
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/shipping" element={<Shipping />} />
+        <Route exact path="/order/confirm" element={<ConfirmOrder />} />
 
 
 
