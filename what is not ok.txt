@@ -7,3 +7,4 @@ forgot password
 header
 product input type not working
 login/shipping path not working
+testing stripe and loading api key from backend

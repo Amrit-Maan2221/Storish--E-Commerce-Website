@@ -1,8 +1,9 @@
 import Footer from "./components/layout/Footer/Footer";
 import Home from "./components/Home/Home";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import axios from "axios";
 import ProductDetails from "./components/Product/ProductDetails";
 import Products from "./components/Product/Products.js";
 import Search from "./components/Product/Search";
@@ -21,7 +22,9 @@ import ResetPassword from "./components/User/ResetPassword.js";
 import Cart from "./components/Cart/Cart.js";
 import Shipping from "./components/Cart/Shipping.js";
 import ConfirmOrder from "./components/Cart/ConfirmOrder.js";
-
+import Payment from "./components/Cart/Payment";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
 
 
 
@@ -29,6 +32,13 @@ import ConfirmOrder from "./components/Cart/ConfirmOrder.js";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
+  async function getStripeApiKey() {
+    const { data } = await axios.get("/api/v1/stripeapikey");
+
+    setStripeApiKey(data.stripeApiKey);
+  }
   useEffect(() => {
     WebFont.load({
       google: {
@@ -37,6 +47,7 @@ function App() {
     });
 
     store.dispatch(loadUser());
+    getStripeApiKey();
   }, []);
 
   return (
@@ -57,6 +68,8 @@ function App() {
         <Route exact path="/cart" element={<Cart />} />
         <Route exact path="/shipping" element={<Shipping />} />
         <Route exact path="/order/confirm" element={<ConfirmOrder />} />
+
+        <Route exact path="/process/payment" element={<Elements stripe={loadStripe("pk_test_51KKCcEF4GjqvLRj1gW0LPNtbfEesKjgcwl5BiqoGHatvaKjgZrPUuSQBq8v0rZWSBXkmAXF7yONYJ0BqeVjeBbeu00Js6wVkSL")}><Payment /></Elements>} />
 
 
 
